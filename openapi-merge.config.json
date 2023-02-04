@@ -1,0 +1,8 @@
+{
+  "inputs": [
+    {
+      "inputFile": "./api/base.json"
+    }
+  ],
+  "output": "./api/bundle.json"
+}

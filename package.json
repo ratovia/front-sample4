@@ -6,9 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "openapi:bundle": "openapi-merge-cli -c openapi-merge.config.json",
+    "openapi": "yarn run openapi:bundle"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.7",
     "@next/font": "13.1.6",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
@@ -19,5 +26,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "openapi-merge-cli": "^1.3.1"
   }
 }

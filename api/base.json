@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "bc34l5jq4f6i6"
+  },
+  "info": {
+    "title": "base",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000"
+    }
+  ],
+  "paths": {
+    "/users/{userId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "Id of an existing user."
+        }
+      ],
+      "get": {
+        "summary": "Get User Info by User ID",
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "User Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found"
+          }
+        },
+        "operationId": "get-user",
+        "description": "Retrieve the information of the user with the matching user ID."
+      },
+      "patch": {
+        "summary": "Update User Information",
+        "operationId": "update-user",
+        "responses": {
+          "200": {
+            "description": "User Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found"
+          },
+          "409": {
+            "description": "Email Already Taken"
+          }
+        },
+        "description": "Update the information of an existing user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "If a new email is given, the user's email verified property will be set to false."
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {}
+            }
+          },
+          "description": "Patch user properties to update."
+        },
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Create New User",
+        "operationId": "create-user",
+        "responses": {
+          "200": {
+            "description": "User Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Missing Required Information"
+          },
+          "409": {
+            "description": "Email Already Taken"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "firstName",
+                  "lastName"
+                ]
+              },
+              "examples": {}
+            }
+          },
+          "description": "Post the necessary fields for the API to create a new user."
+        },
+        "description": "Create a new user.",
+        "tags": [
+          "user"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "description": "",
+        "x-examples": {
+          "Alice Smith": {
+            "id": 142,
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "dateOfBirth": "1997-10-31",
+            "emailVerified": true,
+            "signUpDate": "2019-08-24"
+          }
+        },
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ]
+      }
+    }
+  }
+}
