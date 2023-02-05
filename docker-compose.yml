@@ -18,3 +18,11 @@ services:
       - ./api/bundle.json:/api.json
     environment:
       SWAGGER_JSON: /api.json
+  swagger-api:
+    image: stoplight/prism:3
+    container_name: "swagger-api"
+    ports:
+      - "8004:4010"
+    command: mock -h 0.0.0.0 /api.json
+    volumes:
+      - ./api/bundle.json:/api.json
